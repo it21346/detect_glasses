@@ -1,11 +1,11 @@
 import deeplake 
+import os
 from deeplake.util.exceptions import TransformError, CheckoutError
 import numpy as np
 from PIL import Image
 
-
-# My ActiveLoop token
-api_token = "eyJhbGciOiJIUzUxMiIsImlhdCI6MTY5NzU0ODU3MSwiZXhwIjoxNzI5MTcwOTUwfQ.eyJpZCI6Iml0MjEzNDYifQ.nAQNToa3w0eFPOWBxtAUzreKdZipPuLZ6Oxrw5ynbGPrrtti-8PayEzazX2U6dp48cT5zjffsTK-nMr9Z2XfrA"
+# SET/EXPORT your Activeloop token
+api_token = os.environ.get("MY_ACTIVELOOP_API_TOKEN")
 resize_size = (224,224)
 
 def load_dataset():
@@ -49,6 +49,6 @@ def resize_dataset_activeloop(ds, resize_size):
 if __name__ == "__main__":
     ds = load_dataset()
     ds = resize_dataset_activeloop(ds)
-    if ds.branch != 'main': #it 
+    if ds.branch != 'main':
         #load a specific branch, like the resized one
         ds = deeplake.load(f'hub://it21346/glasses_or_not_dataset@{ds.branch}', token = api_token)
