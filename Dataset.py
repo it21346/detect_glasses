@@ -6,21 +6,22 @@ import numpy as np
 from PIL import Image
 
 class G_Dataset:
-    def __init__(self, token, Activeloop_repo = None, resize_size = (224,224)):
+    def __init__(self, token = None, Activeloop_repo = None, resize_size = (224,224)):
         self.token = token
         self.ds = None
         self.Activeloop_repo = Activeloop_repo
         self.resize_size = resize_size
 
-    def create_dataset(self, dataset_dir):
-        # Activeloop token
-        os.environ['ACTIVELOOP_TOKEN'] = self.token
-        # Directory of the dataset (./Images/Images)
-        data_directory = dataset_dir
-        # Activeloop repo URL
-        deeplake_path = self.Activeloop_repo
-
-        deeplake.ingest_classification(data_directory, deeplake_path)
+    def create_dataset(self, dataset_dir, create_dataset = False):
+        if create_dataset:
+            # Activeloop token
+            os.environ['ACTIVELOOP_TOKEN'] = self.token
+            # Directory of the dataset (./Images/Images)
+            data_directory = dataset_dir
+            # Activeloop repo URL
+            deeplake_path = self.Activeloop_repo
+            print("Entered Loop")
+            # deeplake.ingest_classification(data_directory, deeplake_path)
 
     def load_dataset(self):
         """
@@ -57,19 +58,33 @@ class G_Dataset:
 
 
 if __name__ == "__main__":
-    print("This code will run when the script is executed directly.")
-    # parser = argparse.ArgumentParser(description="Create the dataset into Activeloop")
-    # #Arguments
+    parser = argparse.ArgumentParser(description="Create the dataset into Activeloop")
+    #Arguments
     
-    # parser.add_argument('--token', help="ActiveLoop API Token")
-    # parser.add_argument('--dir', help= "Dataset directory. (./Images/Images)")
-    # parser.add_argument('--repo', help= "ActiveLoop repository URL")
+    parser.add_argument('--token', help="ActiveLoop API Token")
+    parser.add_argument('--dir', help= "Dataset directory. (./Images/Images)")
+    parser.add_argument('--repo', help= "ActiveLoop repository URL")
+    parser.add_argument('--create_dataset', default = False, help= "Flag to indicate whether to create the dataset initially or not.")
+    parser.add_argument('--resize_size', help= "Resize size as tuple (x,y) for the dataset resizing function")
+    args = parser.parse_args()
 
-    # args = parser.parse_args()
+    token = args.token
+    dir = args.dir
+    repo = args.repo
+    resize_size = args.resize_size
+    create_dataset = args.create_dataset
 
-    # token = args.token
-    # dir = args.dir
-    # repo = args.repo
-    # cl = G_Dataset()
-    # print(dir)
-    # # create_dataset(token, dir, repo)
+    #check if Token/Repo have been given as args
+    if not token or not repo:
+        print("Please provide either token or repo URL as arguments!")
+    #check if flag has been given but not the directory of the dataset
+    elif not dir:
+        print("You need to also provide a path to the dataset!")
+    else:
+        if resize_size:
+            cl = G_Dataset(token, repo, resize_size = resize_size)
+
+        #create the dataset if create_dataset was True
+        cl.create_dataset(dir, create_dataset)
+        cl.load_dataset()
+        cl.resize_dataset_activeloop()
