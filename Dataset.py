@@ -26,7 +26,7 @@ class G_Dataset:
         """
         Load the dataset from ActiveLoop
         """
-        self.ds = deeplake.load(self.repo, token = self.token)
+        self.ds = deeplake.load(self.Activeloop_repo, token = self.token)
 
     
     def resize_dataset_activeloop(self):
@@ -34,7 +34,7 @@ class G_Dataset:
         There is a need to resize the original images of the dataset, which are (1024, 1024, 3) size, to an appropriate size for feeding our later on NN model.
         """
         try: #if the resized dataset branch already exists, do nothing and move on. Otherwise, create a resized dataset branch.
-            self.ds = deeplake.load(f'{self.Activeloop_repo}@resized/dataset', token = self.token)
+            self.ds = deeplake.load(f'{self.Activeloop_repo}', token = self.token)
         except CheckoutError as e:
 
             @deeplake.compute
@@ -86,5 +86,5 @@ if __name__ == "__main__":
         cl = G_Dataset(token, repo)
         #create the dataset if create_dataset was True
         cl.create_dataset(dir, create_dataset)
+        # cl.resize_dataset_activeloop()
         cl.load_dataset()
-        cl.resize_dataset_activeloop()
