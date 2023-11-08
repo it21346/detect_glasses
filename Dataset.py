@@ -20,14 +20,13 @@ class G_Dataset:
             data_directory = dataset_dir
             # Activeloop repo URL
             deeplake_path = self.Activeloop_repo
-            print("Entered Loop")
-            # deeplake.ingest_classification(data_directory, deeplake_path)
+            deeplake.ingest_classification(data_directory, deeplake_path)
 
     def load_dataset(self):
         """
         Load the dataset from ActiveLoop
         """
-        self.ds = deeplake.load('hub://it21346/glasses_or_not_dataset', token = self.token)
+        self.ds = deeplake.load(self.repo, token = self.token)
 
     
     def resize_dataset_activeloop(self):
@@ -64,7 +63,7 @@ if __name__ == "__main__":
     parser.add_argument('--token', help="ActiveLoop API Token")
     parser.add_argument('--dir', help= "Dataset directory. (./Images/Images)")
     parser.add_argument('--repo', help= "ActiveLoop repository URL")
-    parser.add_argument('--create_dataset', default = False, help= "Flag to indicate whether to create the dataset initially or not.")
+    parser.add_argument('--create_dataset', default = False, help= "Flag to indicate whether to create the dataset initially or not. 'True' to create the dataset.")
     parser.add_argument('--resize_size', help= "Resize size as tuple (x,y) for the dataset resizing function")
     args = parser.parse_args()
 
@@ -83,7 +82,8 @@ if __name__ == "__main__":
     else:
         if resize_size:
             cl = G_Dataset(token, repo, resize_size = resize_size)
-
+        
+        cl = G_Dataset(token, repo)
         #create the dataset if create_dataset was True
         cl.create_dataset(dir, create_dataset)
         cl.load_dataset()
