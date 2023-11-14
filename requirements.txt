@@ -1,3 +1,7 @@
 tensorflow
 keras
 numpy
+opencv-python-headless
+pillow
+pybase64
+Python-IO

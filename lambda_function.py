@@ -5,7 +5,10 @@ import json
 import boto3
 import pickle
 import os
-
+import io
+import cv2
+import base64
+from PIL import Image
 s3_client = boto3.client('s3')
 
 def load_model_from_s3(bucket_name, model_key):
@@ -27,7 +30,7 @@ def lambda_handler(event, context):
     model = load_model_from_s3(bucket_name, model_key)
     if 'body' in event:
         input_data = get_input_data(event)  # Define your function to extract input data
-        result = model.predict(input_data)
+        result = model.predict(input_data[None])
 
         response = {
             'statusCode': 200,
@@ -44,6 +47,11 @@ def lambda_handler(event, context):
 
 def get_input_data(event):
     if 'body' in event:
-        image_data = event['body']
-        return image_data
+        image_bytes = event['body'].encode('utf-8')
+        img_b64dec = base64.b64decode(image_bytes)
+        img_byteIO = io.BytesIO(img_b64dec)
+        image = Image.open(img_byteIO)
+        image = numpy.array(image)
+        image = cv2.resize(image, (224,224))
+        return image
     return None
