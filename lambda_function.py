@@ -1,3 +1,4 @@
+from lib2to3.pytree import Node
 import keras
 import tensorflow
 import numpy
@@ -28,8 +29,9 @@ def lambda_handler(event, context):
     bucket_name = os.environ.get('BUCKET_NAME', 'detect-glasses-model')
     model_key = os.environ.get('MODEL_KEY', 'MNv3_model.pkl')
     model = load_model_from_s3(bucket_name, model_key)
-    if 'body' in event:
-        input_data = get_input_data(event)  # Define your function to extract input data
+    input_data = get_input_data(event)  # Define your function to extract input data
+    if 'body' in event and event['body'] and input_data is not None:
+        
         result = model.predict(input_data[None])
 
         response = {
@@ -46,7 +48,7 @@ def lambda_handler(event, context):
         }
 
 def get_input_data(event):
-    if 'body' in event:
+    if 'body' in event and event['body']:
         image_bytes = event['body'].encode('utf-8')
         img_b64dec = base64.b64decode(image_bytes)
         img_byteIO = io.BytesIO(img_b64dec)
