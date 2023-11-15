@@ -1,0 +1,17 @@
+name: detect-glasses-project  # Name of the environment
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python= 3.10.12 # Specify the Python version
+  - boto3
+  - keras
+  - numpy
+  - opencv
+  - Pillow
+  - Requests
+  - tensorflow
+  - pip:
+    - deeplake
