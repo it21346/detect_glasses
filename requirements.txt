@@ -1,0 +1,8 @@
+boto3
+keras
+numpy
+opencv-python
+Pillow
+Requests
+tensorflow
+deeplake
