@@ -10,11 +10,10 @@ In this project, you can create an Activeloop Deeplake dataset repository, creat
 
 ## Getting Started
 ### Prerequisites and Installation
-In order to run this project, you need to install the appropriate prerequisites.
+In order to run this project, you need to install the appropriate prerequisites. Note that you should have already python installed in your system.
 
 On windows from any CMD:
 ```python
-#Note that you should have already python installed in your system
 #Create a python virtual environment named venv
 python -m venv venv
 #Activate the virtual environment
