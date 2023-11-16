@@ -98,14 +98,17 @@ if __name__ == "__main__":
     repo_dataset = args.repo_dataset
     modelname = args.modelname
 
-    ds = deeplake.load(repo_dataset, token = token)
+    if not repo_dataset or not token:
+        print("You need to provide the Dataset repository URL or the Token")
+    else:
+        ds = deeplake.load(repo_dataset, token = token)
 
-    cl = MobileNet(ds, modelname = modelname, activation_func = activation_func, loss = loss, lr = lr, epochs = epochs)
+        cl = MobileNet(ds, modelname = modelname, activation_func = activation_func, loss = loss, lr = lr, epochs = epochs)
 
-    if train: #if we want to train
-        model = cl.train_model()
-        cl.save_model()
+        if train: #if we want to train
+            model = cl.train_model()
+            cl.save_model()
 
-    model = cl.load_model()
-    if model: #if the model existed
-        print(f"Successfully loaded model {modelname}")
+        model = cl.load_model()
+        if model: #if the model existed
+            print(f"Successfully loaded model {modelname}")
