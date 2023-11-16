@@ -3,7 +3,7 @@
 ## Introduction
 This is a side project to detect the presence of glasses on human faces. Using technologies like Convolutional Neural Networks (CNNs) for binary classification (*0 : No glasses, 1: Glasses*), Activeloop Deeplake, Amazon Web Services, to produce a pipeline for creating an activeloop dataset, creating and training a CNN model, and finally providing inference capabilities for new test images through AWS and Docker.
 ## Dataset
-For this project, the *Glasses or No Glasses* dataset was used from Kaggle, which is a Generative Adversarial Neural Network (GAN) produced dataset, which means these are not real people. Since the original dataset contained a noticeable amount of wrongly labeled images, the community developed a cleaned up version with seperate folders for each class.
+For this project, the *Glasses or No Glasses* dataset was used from Kaggle, which is a Generative Adversarial Neural Network (GAN) produced dataset, which means these are not real people. Since the original dataset contained a noticeable amount of wrongly labeled images, the community developed a cleaned up version with seperate folders for each class. In addition, the dataset consists of profile angle pictures of single people.
 
 ## Features
 In this project, you can create an Activeloop Deeplake dataset repository, create and train a CNN model (specifically the **MobileNetv3Small** version), and provide inference capabilities to the trained model through AWS and Docker. Each of these steps can be run as a seperate script.
@@ -63,6 +63,7 @@ pip install -r requirements.txt
 ## Inference
 From this point on, to make inferences on the model and make predictions based on image inputs, my already set up AWS, Docker and trained model will be used. In this project, there are files that I used to set up the Docker image and configure the Lambda Function. These files are [Dockerfile](Dockerfile), [lambda_function.py](lambda_function.py), [requirements_docker.txt](requirements_docker.txt). The model I had trained, using the steps mentioned earlier, was saved into an AWS S3 bucket. I created an AWS lambda function, an AWS API Gateway and an AWS Elastic Container Registry (ECR). I uploaded my Docker image into the AWS ECR, and used it in my AWS lambda function, which in turn loads up my model from the AWS S3 bucket and make inferences based on inputs from the http requests in the API Gateway that triggers the Lambda function.
 ### Usage
+Preferably use a profile angle picture of a single person.
 `python -m main.py --image <PATH_TO_IMAGE>`
 
 Arguments:
