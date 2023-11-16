@@ -82,6 +82,8 @@ if __name__ == "__main__":
     parser.add_argument('--lr', default = 0.001, type = float,  help= "Learning rate. Default is '0.001'. ")
     parser.add_argument('--epochs', default = 5, type = int, help= "Epochs for the model to train. Default is '5'.")
     parser.add_argument('--train', default = False, help= "Flag to indicate whether to train the model or not. 'True' to train the model.")
+    parser.add_argument('--token', default = None , help="ActiveLoop API Token")
+    parser.add_argument('--repo_dataset', default = None , help="ActiveLoop dataset repository URL. For examply, mine is 'hub://it21346/glasses_or_not_dataset'.")
     parser.add_argument('--modelname', help= "Name for the model. If argument train = True is given, the trained model will be named likewise. \
                         If not intending training, this modelname will be used to load the corresponding model. \
                         Note: Also use .pkl in the end. Refers to any model saved at ./models/*.pkl")
@@ -92,10 +94,11 @@ if __name__ == "__main__":
     lr = args.lr
     train = args.train
     epochs = args.epochs
+    token = args.token
+    repo_dataset = args.repo_dataset
     modelname = args.modelname
 
-    #testing purposes
-    ds = deeplake.load('hub://it21346/glasses_or_not_dataset', token = os.environ.get('MY_ACTIVELOOP_API_TOKEN'))
+    ds = deeplake.load(repo_dataset, token = token)
 
     cl = MobileNet(ds, modelname = modelname, activation_func = activation_func, loss = loss, lr = lr, epochs = epochs)
 
