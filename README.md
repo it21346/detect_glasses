@@ -43,7 +43,7 @@ pip install -r requirements.txt
     - **(Optional) --create_dataset** : is default to False and won't create the dataset, but you can load it (In the case you have already created one and you just want to load)
     - **(Optional) --resize_size** : is referring to the image size which is default to (224,224), and if you want to specify a new one you should as tuple (x,y) for the dataset resizing function
   
- - If you want to train the MobileNetv3Small from scratch, you need to first have created an Activeloop dataset repository and have a token and that repoSITORY URL.
+ - If you want to train the MobileNetv3Small from scratch, you need to first have created an Activeloop dataset repository and have a token and that repository URL.
   `python -m MobileNetv3Small.py --modelname <YOUR_PREF_MODELNAME.pkl> --`
   Arguments:
     - **--modelname** : Name for the model. If argument --train = True is given, the trained model will be named likewise. \
