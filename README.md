@@ -19,7 +19,7 @@ python -m venv venv
 #Activate the virtual environment
 venv\Scripts\activate
 #Install all the dependencies from the path of the requirements.txt file
-python -m pip install -r /path/to/requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 On Unix or MacOS:
