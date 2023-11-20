@@ -62,7 +62,7 @@ pip install -r requirements.txt
     - **(Optional) --repo_dataset** : ActiveLoop API Token. Default is None
     - **(Optional) --token** : ActiveLoop dataset repository URL. For examply, mine is 'hub://it21346/glasses_or_not_dataset'. Default is None
 
-    **NOTE:** This model's computational capabilities are not big and can be run on CPU, this it has not been optimized for GPU usage.  
+    **NOTE:** This model's computational capabilities are not big and can be run on CPU, thus, it has not been optimized for GPU usage.  
 
 
 ## Inference
