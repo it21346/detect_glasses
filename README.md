@@ -33,8 +33,9 @@ pip install -r requirements.txt
 ```
 
 ### Usage
- - If you want to create your own Activeloop dataset repository, you need to download the dataset provided in this link https://www.kaggle.com/datasets/jorgebuenoperez/datacleaningglassesnoglasses and run the following script. 
-`python -m Dataset.py --token 'YOUR_API_TOKEN --dir 'YOUR_DATASET_DIRECTORY' --repo 'YOUR_REPO_URL'` 
+ - If you want to create your own Activeloop dataset repository, you need to download the dataset provided in this link https://www.kaggle.com/datasets/jorgebuenoperez/datacleaningglassesnoglasses and run the following script.
+
+   `python -m Dataset.py --token 'YOUR_API_TOKEN --dir 'YOUR_DATASET_DIRECTORY' --repo 'YOUR_REPO_URL'` 
 
 
     Arguments:
@@ -45,7 +46,10 @@ pip install -r requirements.txt
     - **(Optional) --resize_size** : is referring to the image size which is default to (224,224), and if you want to specify a new one you should as tuple (x,y) for the dataset resizing function
   
  - If you want to train the MobileNetv3Small from scratch, you need to first have created an Activeloop dataset repository and have a token and that repository URL.
-  `python -m MobileNetv3Small.py --modelname <YOUR_PREF_MODELNAME.pkl> --`
+
+   `python -m MobileNetv3Small.py --modelname <YOUR_PREF_MODELNAME.pkl> --`
+
+   
   Arguments:
     - **--modelname** : Name for the model. If argument --train = True is given, the trained model will be named likewise. \
     If not intending training, this modelname will be used to load the corresponding model. \
