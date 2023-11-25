@@ -1,7 +1,7 @@
 # detect_glasses
 
 ## Introduction
-This is a side project to detect the presence of glasses on human faces. Using technologies like Convolutional Neural Networks (CNNs) for binary classification (*0 : No glasses, 1: Glasses*), Activeloop Deeplake, Amazon Web Services, to produce a pipeline for creating an activeloop dataset, creating and training a CNN model, and finally providing inference capabilities for new test images through AWS and Docker.
+This is a side project focused on detecting the presence of glasses on human faces. Utilized technologies such as Convolutional Neural Networks (CNNs) for binary classification (0: No glasses, 1: Glasses), Activeloop Deeplake, and Amazon Web Services. Established a comprehensive pipeline for Activeloop dataset creation, CNN model training, and the deployment of inference capabilities for new test images through AWS and Docker.
 ## Dataset
 For this project, the *Glasses or No Glasses* dataset was used from Kaggle, which is a Generative Adversarial Neural Network (GAN) produced dataset, which means these are not real people. Since the original dataset contained a noticeable amount of wrongly labeled images, the community developed a cleaned up version with seperate folders for each class. In addition, the dataset consists of profile angle pictures of single people.
 
