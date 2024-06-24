@@ -65,7 +65,7 @@ pip install -r requirements.txt
     **NOTE:** This model's computational capabilities are not big and can be run on CPU, thus, it has not been optimized for GPU usage.  
 
 
-## Inference
+## Inference (Note: AWS not available)
 From this point on, to make inferences on the model and make predictions based on image inputs, my already set up AWS, Docker and trained model will be used. In this project, there are files that I used to set up the Docker image and configure the Lambda Function. These files are [Dockerfile](Dockerfile), [lambda_function.py](lambda_function.py), [requirements_docker.txt](requirements_docker.txt). The model I had trained, using the steps mentioned earlier, was saved into an AWS S3 bucket. I created an AWS lambda function, an AWS API Gateway and an AWS Elastic Container Registry (ECR). I uploaded my Docker image into the AWS ECR, and used it in my AWS lambda function, which in turn loads up my model from the AWS S3 bucket and make inferences based on inputs from the http requests in the API Gateway that triggers the Lambda function.
 ### Usage
 Preferably use a profile angle picture of a single person.
